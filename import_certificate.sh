@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 mkdir -p "${TMPDIR}/appbuilder/secrets"
 aws s3 sync s3://sil-stg-aps-secrets/travis/build/* "${TMPDIR}/appbuilder/secrets"
 security create-keychain -p $KEYCHAIN_PASSWORD "${TMPDIR}/appbuilder/appbuilder.keychain"

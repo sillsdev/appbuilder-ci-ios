@@ -2,6 +2,7 @@ os: osx
 
 stages:
   - "Import Certificate"
+  - "Set Keychain"
 
 jobs:
   include:
@@ -19,3 +20,10 @@ jobs:
         - echo "Importing certificate"
         - time ( ./import_certificate.sh )
         - echo "Importing done!"
+
+    - stage: "Set Keychain"
+      language: generic
+      script:
+        - echo "Set Keychain"
+        - time ( ./set_appbuilder_keychain.sh )
+        - echo "Set done!"

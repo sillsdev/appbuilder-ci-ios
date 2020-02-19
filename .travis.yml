@@ -8,6 +8,7 @@ jobs:
     - stage: "Sign IPA"
       language: generic
       before_install:
+      - which aws
       - python --version
       - >
         time (
@@ -15,6 +16,9 @@ jobs:
           unzip awscli-bundle.zip
           sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
         )
+      - which aws
       script:
         - time ( ./import_certificate.sh )
         - time ( ./set_appbuilder_keychain.sh )
+        - time ( ./download_asset.sh )
+        - time ( ./resign_asset.sh )

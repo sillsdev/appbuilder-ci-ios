@@ -1,12 +1,11 @@
 os: osx
 
 stages:
-  - "Import Certificate"
-  - "Set Keychain"
+  - "Sign IPA"
 
 jobs:
   include:
-    - stage: "Import Certificate"
+    - stage: "Sign IPA"
       language: generic
       before_install:
       - python --version
@@ -17,13 +16,5 @@ jobs:
           sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
         )
       script:
-        - echo "Importing certificate"
         - time ( ./import_certificate.sh )
-        - echo "Importing done!"
-
-    - stage: "Set Keychain"
-      language: generic
-      script:
-        - echo "Set Keychain"
         - time ( ./set_appbuilder_keychain.sh )
-        - echo "Set done!"

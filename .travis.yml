@@ -1,0 +1,21 @@
+os: osx
+
+stages:
+  - "Import Certificate"
+
+jobs:
+  include:
+    - stage: "Import Certificate"
+      language: generic
+      before_install:
+      - python --version
+      - >
+        time (
+          wget "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip"
+          unzip awscli-bundle.zip
+          sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+        )
+      script:
+        - echo "Importing certificate"
+        - time ( ./import_certificate.sh )
+        - echo "Importing done!"

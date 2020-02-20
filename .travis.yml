@@ -8,7 +8,6 @@ jobs:
     - stage: "Sign IPA"
       language: generic
       before_install:
-      - which aws
       - python --version
       - >
         time (

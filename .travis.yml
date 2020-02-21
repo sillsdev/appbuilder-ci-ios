@@ -17,4 +17,7 @@ jobs:
         )
       - which aws
       script:
+        - time ( ./download_secrets.sh )
+        - time ( ./download_asset.sh )
         - time ( ./resign_asset.sh )
+        - time ( ./upload_asset.sh )

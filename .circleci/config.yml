@@ -1,0 +1,22 @@
+version: 2.1
+orbs:
+  aws-s3: circleci/aws-s3@1.0.15
+  
+jobs:
+  build:
+    macos:
+      xcode: 11.1.1
+    steps:
+      - checkout
+      - run: mkdir -p appbuilder/secrets
+      - aws-s3/sync:
+        from: 's3://sil-stg-apg-secrets/travis/build'
+        to: appbuilder/secrets
+      - run: mkdir -p asset
+      - aws-s3/sync:
+        from: 's3://cth-dev-aps-artifacts/travis'
+        to: asset
+      - run: resign_asset.sh
+      - aws-s3/sync:
+        from: asset
+        to: 's3://cth-dev-aps-artifacts/travis'

@@ -6,6 +6,7 @@ stages:
 jobs:
   include:
     - stage: "Sign IPA"
+      if: branch = master
       language: generic
       before_install:
       - python --version

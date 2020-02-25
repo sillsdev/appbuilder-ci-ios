@@ -8,8 +8,6 @@ jobs:
       xcode: "11.1.0"
     steps:
       - checkout
-      - run: pwd
-      - run: ls -l
       - run: mkdir -p appbuilder/secrets
       - aws-s3/sync:
           from: 's3://sil-stg-aps-secrets/travis/build'
@@ -18,7 +16,7 @@ jobs:
       - aws-s3/sync:
           from: 's3://cth-dev-aps-artifacts/travis'
           to: asset
-      - run: resign_asset.sh
+      - run: ./resign_asset.sh
       - aws-s3/sync:
           from: asset
           to: 's3://cth-dev-aps-artifacts/travis'

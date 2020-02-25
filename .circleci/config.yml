@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run: mkdir -p appbuilder/secrets
       - aws-s3/sync:
-          from: 's3://sil-stg-apg-secrets/travis/build'
+          from: 's3://sil-stg-aps-secrets/travis/build'
           to: appbuilder/secrets
       - run: mkdir -p asset
       - aws-s3/sync:

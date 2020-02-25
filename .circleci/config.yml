@@ -5,7 +5,7 @@ orbs:
 jobs:
   build:
     macos:
-      xcode: 11.1.1
+      xcode: "11.1.0"
     steps:
       - checkout
       - run: mkdir -p appbuilder/secrets

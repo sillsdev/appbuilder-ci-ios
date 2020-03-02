@@ -10,14 +10,13 @@ jobs:
       - checkout
       - run: mkdir -p appbuilder/secrets
       - aws-s3/sync:
-          from: 's3://sil-stg-apg-secrets/travis/build'
+          from: "${APPBUILDER_SECRETS_PATH}"
           to: appbuilder/secrets
       - run: mkdir -p asset
       - aws-s3/sync:
-          from: 's3://cth-dev-aps-artifacts/travis'
+          from: "${APPBUILDER_ASSERT_DOWNLOAD_PATH}"
           to: asset
       - run: resign_asset.sh
       - aws-s3/sync:
-          from: asset
-          to: 's3://cth-dev-aps-artifacts/travis'
-          overwrite: true
+          from: result
+          to: "${APPBUILDER_ASSET_RESULT_PATH}"

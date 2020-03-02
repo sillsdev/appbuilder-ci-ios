@@ -1,2 +1,4 @@
 #!/bin/bash
-aws s3 sync asset s3://cth-dev-aps-artifacts/travis
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+aws s3 sync result "${DIR}/result" "${APPBUILDER_ASSET_RESULT_PATH}"

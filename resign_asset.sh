@@ -14,5 +14,5 @@ security unlock-keychain -p "${KEYCHAIN_PASSWORD}" "${DIR}/appbuilder/appbuilder
 mkdir -p "${DIR}/result"
 EXT="${APPBUILDER_ASSET##*.}"
 APPBUILDER_RESULT="${APPBUILDER_ASSET%.*}-resigned.${EXT}"
-./resign.sh $"{DIR}/asset/${APPBUILDER_ASSET}" "iPhone Distribution: Chris Hubbard (5P99T946M7)" -p "${DIR}/appbuilder/secrets/app.mobileprovision" "${DIR}/result/${APPBUILDER_RESULT}"
+./resign.sh "${DIR}/asset/${APPBUILDER_ASSET}" "iPhone Distribution: Chris Hubbard (5P99T946M7)" -p "${DIR}/appbuilder/secrets/app.mobileprovision" "${DIR}/result/${APPBUILDER_RESULT}"
 

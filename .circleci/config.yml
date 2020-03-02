@@ -16,7 +16,7 @@ jobs:
       - aws-s3/sync:
           from: "${APPBUILDER_ASSET_DOWNLOAD_PATH}"
           to: asset
-      - run: resign_asset.sh
+      - run: ./resign_asset.sh
       - aws-s3/sync:
           from: result
           to: "${APPBUILDER_ASSET_RESULT_PATH}"

@@ -3,8 +3,9 @@ set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # import certificate
+CERTIFICATE_PASSWORD="$(cat "${DIR}/appbuilder/secrets/cert.txt")"
 security create-keychain -p $KEYCHAIN_PASSWORD "${DIR}/appbuilder/appbuilder.keychain"
-security import "${DIR}/appbuilder/secrets/Certificates.p12" -t agg -k "${DIR}/appbuilder/appbuilder.keychain" -P $CERTIFICATE_PASSWORD -A
+security import "${DIR}/appbuilder/secrets/cert.p12" -t agg -k "${DIR}/appbuilder/appbuilder.keychain" -P $CERTIFICATE_PASSWORD -A
 
 # set keychain
 security list-keychains -s "${DIR}/appbuilder/appbuilder.keychain"

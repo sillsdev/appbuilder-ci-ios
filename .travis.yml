@@ -1,3 +1,10 @@
+env:
+  global:
+    - APPBUILDER_ASSET=default.ipa
+    - APPBUILDER_ASSET_DOWNLOAD_PATH=s3://sil-stg-aps-files/default
+    - APPBUILDER_ASSET_RESULT_PATH=s3://sil-stg-aps-files/stg/signed
+    - APPBUILDER_SECRETS_PATH=s3://sil-stg-aps-secrets/travis/build
+
 os: osx
 
 stages:

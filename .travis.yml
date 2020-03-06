@@ -6,6 +6,7 @@ env:
     - APPBUILDER_SECRETS_PATH=s3://sil-stg-aps-secrets/travis/build
 
 os: osx
+language: shell
 
 stages:
   - "Sign IPA"

@@ -1,22 +1,16 @@
-version: 2.1
-orbs:
-  aws-s3: circleci/aws-s3@1.0.15
-  
+version: 2
+
 jobs:
   build:
     macos:
       xcode: "11.1.0"
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - checkout
-      - run: mkdir -p appbuilder/secrets
-      - aws-s3/sync:
-          from: "${APPBUILDER_SECRETS_PATH}"
-          to: appbuilder/secrets
-      - run: mkdir -p asset
-      - aws-s3/sync:
-          from: "${APPBUILDER_ASSET_DOWNLOAD_PATH}"
-          to: asset
+      - run: brew install wget
+      - run: ./install_aws_cli.sh
+      - run: ./download_secrets.sh
+      - run: ./download_asset.sh
       - run: ./resign_asset.sh
-      - aws-s3/sync:
-          from: result
-          to: "${APPBUILDER_ASSET_RESULT_PATH}"
+      - run: ./upload_asset.sh

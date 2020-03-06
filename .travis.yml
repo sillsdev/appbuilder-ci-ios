@@ -18,13 +18,7 @@ jobs:
       language: generic
       before_install:
       - python --version
-      - >
-        time (
-          wget "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip"
-          unzip awscli-bundle.zip
-          sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
-        )
-      - which aws
+      - time ( ./install_aws_cli.sh )
       script:
         - time ( ./download_secrets.sh )
         - time ( ./download_asset.sh )

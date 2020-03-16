@@ -9,10 +9,16 @@ os: osx
 language: shell
 
 stages:
+  - "Builder"
   - "Sign IPA"
 
 jobs:
   include:
+    - stage: "Builder"
+      if: branch = builder
+      script:
+        - time ( ./install_npm_packages.sh )
+
     - stage: "Sign IPA"
       if: branch = master
       language: generic

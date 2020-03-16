@@ -2,6 +2,9 @@ version: 2
 
 jobs:
   build:
+    branches:
+      only:
+        - master
     macos:
       xcode: "11.1.0"
     environment:

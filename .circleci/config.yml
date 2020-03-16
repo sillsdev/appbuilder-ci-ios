@@ -1,6 +1,18 @@
 version: 2
 
 jobs:
+  builder:
+    branches:
+      only:
+        - builder
+    macos:
+      xcode: "11.1.0"
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+    steps:
+      - checkout
+      - run: echo local > /etc/ansible/hosts
+      - run: cd ansible && ansible-playbook playbook.yml -c local
   build:
     branches:
       only:

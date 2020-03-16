@@ -1,0 +1,27 @@
+---
+
+- name: Install Electron
+  npm:
+    name: electron
+    version: 3.0.13
+    global: yes
+
+- name: Install Electron-Builder
+  npm:
+    name: electron-builder
+    global: yes
+
+- name: Install Resize Image CLI
+  npm:
+    name: resize-img-cli
+    global: yes
+
+- name: Install Electron Icon Maker
+  npm:
+    name: electron-icon-maker
+    global: yes
+
+- name: Install Workbox CLI
+  npm:
+    name: workbox-cli
+    global: yes

@@ -17,7 +17,8 @@ jobs:
     - stage: "Builder"
       if: branch = builder
       script:
-        - time ( ./install_npm_packages.sh )
+        - echo local > /etc/ansible/hosts
+        - time ( cd ansible && ansible-playbook playbook.yml -c local )
 
     - stage: "Sign IPA"
       if: branch = master

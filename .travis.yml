@@ -7,28 +7,14 @@ env:
 
 os: osx
 language: shell
-
-stages:
-  - "Install"
-  - "Download"
-  - "Builder"
-  - "Sign IPA"
-
-jobs:
-  include:
-    - stage: "Install"
-      script:
-      - time ( ./install_aws_cli.sh )
-      - time ( cd ansible && ansible-playbook playbook.yml )
-    - stage: "Download"
-      script:
-        - time ( ./download_secrets.sh )
-        - time ( ./download_asset.sh )
-    - stage: "Builder"
-      script:
-        - time ( ./builder.sh )
-    - stage: "Sign IPA"
-      if: branch = master
-      language: generic
-        - time ( ./resign_asset.sh )
-        - time ( ./upload_asset.sh )
+install:
+  - time ( ./install_aws_cli.sh )
+  - time ( cd ansible && ansible-playbook playbook.yml )
+before_script:
+  - time ( ./download_secrets.sh )
+  - time ( ./download_asset.sh )
+script:
+  - time ( ./builder.sh )
+#  - time ( ./resign_asset.sh )
+afer_script:
+#   - time ( ./upload_asset.sh )

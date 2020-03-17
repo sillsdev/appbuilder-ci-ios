@@ -1,6 +1,5 @@
 #!/bin/bash
 
-mkdir builder && cd builder && unzip ../builder.zip
-mkdir -p build/HTML && cd builder/HTML && unzip ../../html.zip
-find . -print
-
+mkdir builder && cd builder && unzip ../asset/builder.zip
+mkdir -p builder/HTML && cd builder/HTML && unzip ../../asset/html.zip
+find builder -print

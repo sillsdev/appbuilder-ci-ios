@@ -9,24 +9,26 @@ os: osx
 language: shell
 
 stages:
+  - "Install"
+  - "Download"
   - "Builder"
   - "Sign IPA"
 
 jobs:
   include:
-    - stage: "Builder"
-      if: branch = builder
+    - stage: "Install"
       script:
-        - time ( cd ansible && ansible-playbook playbook.yml )
-
-    - stage: "Sign IPA"
-      if: branch = master
-      language: generic
-      before_install:
-      - python --version
       - time ( ./install_aws_cli.sh )
+      - time ( cd ansible && ansible-playbook playbook.yml )
+    - stage: "Download"
       script:
         - time ( ./download_secrets.sh )
         - time ( ./download_asset.sh )
+    - stage: "Builder"
+      script:
+        - time ( ./builder.sh )
+    - stage: "Sign IPA"
+      if: branch = master
+      language: generic
         - time ( ./resign_asset.sh )
         - time ( ./upload_asset.sh )

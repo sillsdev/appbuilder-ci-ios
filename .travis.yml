@@ -8,7 +8,6 @@ env:
 os: osx
 language: shell
 install:
-  - time ( ./install_aws_cli.sh )
   - time ( cd ansible && ansible-playbook playbook.yml )
 before_script:
   - time ( ./download_secrets.sh )

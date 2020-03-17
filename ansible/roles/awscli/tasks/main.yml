@@ -1,0 +1,10 @@
+---
+
+- name: Download AWS CLI Bundle
+  shell: wget "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip"
+
+- name: Extract AWS CLI Bundle
+  shell: unzip awscli-bundle.zip
+
+- name: Install AWS CLI
+  shell: sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws

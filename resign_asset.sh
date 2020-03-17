@@ -2,16 +2,7 @@
 set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# import certificate
-CERTIFICATE_PASSWORD="$(cat "${DIR}/appbuilder/secrets/cert.txt")"
-security create-keychain -p $KEYCHAIN_PASSWORD "${DIR}/appbuilder/appbuilder.keychain"
-security import "${DIR}/appbuilder/secrets/cert.p12" -t agg -k "${DIR}/appbuilder/appbuilder.keychain" -P $CERTIFICATE_PASSWORD -A
-
-# set keychain
-security list-keychains -s "${DIR}/appbuilder/appbuilder.keychain"
-security default-keychain -s "${DIR}/appbuilder/appbuilder.keychain"
-security unlock-keychain -p "${KEYCHAIN_PASSWORD}" "${DIR}/appbuilder/appbuilder.keychain"
-SIGNING_IDENTITY=$(security find-identity -p codesigning -v | grep "^  \d)" | cut -d\" -f2)
+SIGNING_IDENTITY=$(security find-identity -p codesigning -v | grep Distribution | cut -d\" -f2)
 
 # resign app
 mkdir -p "${DIR}/result"
